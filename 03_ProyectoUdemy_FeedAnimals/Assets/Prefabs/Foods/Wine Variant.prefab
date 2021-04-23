@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!65 &1769986137724055627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377027531653713215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24241088, y: 0.9589979, z: 0.24241088}
+  m_Center: {x: 0, y: -0.000000059604645, z: 0}
+--- !u!1001 &5867424714342152674
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2013757461676242128, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: f9c04ce17e1bea441a2dde5505e10ed5, type: 3}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2117276
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5324564
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.117294
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242129, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013757461676242141, guid: 54889c344abc0694e984f6393e838ccf,
+        type: 3}
+      propertyPath: m_Name
+      value: Wine Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4582607786408351126, guid: 54889c344abc0694e984f6393e838ccf, type: 3}
+    - {fileID: 5663064584964521125, guid: 54889c344abc0694e984f6393e838ccf, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 54889c344abc0694e984f6393e838ccf, type: 3}
+--- !u!1 &5377027531653713215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2013757461676242141, guid: 54889c344abc0694e984f6393e838ccf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5867424714342152674}
+  m_PrefabAsset: {fileID: 0}
