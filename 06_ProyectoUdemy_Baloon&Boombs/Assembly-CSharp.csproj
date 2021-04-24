@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CA19F32A-218A-8DB6-891C-83023303A7DD}</ProjectGuid>
+    <ProjectGuid>{AABBCFF2-A5D0-A32E-6068-C6D18AD3A441}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,11 +61,11 @@
     <Compile Include="Assets\_Scripts\MoveLeft.cs" />
     <Compile Include="Assets\Challenge 3\Scripts\PlayerControllerX.cs" />
     <Compile Include="Assets\_Scripts\PlayerController.cs" />
+    <Compile Include="Assets\_Scripts\BackgroundController.cs" />
     <Compile Include="Assets\Challenge 3\_Source_Files\SpinObjectsX.cs" />
     <Compile Include="Assets\Challenge 3\Scripts\RepeatBackgroundX.cs" />
-    <Compile Include="Assets\Challenge 3\Scripts\MoveLeftX.cs" />
     <Compile Include="Assets\_Scripts\OutIOfBoundsController.cs" />
-    <Compile Include="Assets\_Scripts\BackgroundController.cs" />
+    <Compile Include="Assets\Challenge 3\Scripts\MoveLeftX.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Course Library\_Source_Files\Materials\UnlitVertexColour_Alpha.shader" />
