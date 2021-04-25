@@ -118,7 +118,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!114 &3309962261168539915
 MonoBehaviour:
@@ -134,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxInpulseForce: 20
   minImpulseForce: 15
+  maxInpulseForceX: 2
+  minImpulseForceX: 0
   torqueForce: 15
   explosionParticle: {fileID: 4758139293545943008, guid: c7ad2532a6eeb40b59033c75e71fa054,
     type: 3}

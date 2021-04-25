@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxInpulseForce: 16.5
   minImpulseForce: 15
+  maxInpulseForceX: 2
+  minImpulseForceX: 0
   torqueForce: 15
   explosionParticle: {fileID: 3199346384015752365, guid: 307229a5540374aae98859caad2128a3,
     type: 3}
@@ -115,7 +117,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!64 &5893248589675515035
 MeshCollider:

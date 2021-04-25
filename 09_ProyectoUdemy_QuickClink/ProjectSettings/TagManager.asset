@@ -8,6 +8,9 @@ TagManager:
   - Bomb
   - Food
   - PowerUp
+  - Easy
+  - Normal
+  - Hard
   layers:
   - Default
   - TransparentFX

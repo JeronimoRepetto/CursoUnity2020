@@ -14,35 +14,147 @@ public class GameManager : MonoBehaviour
         gameOver,
         pause
     }
+
+    public enum GameMode
+    {
+        easy,
+        normal,
+        hard
+    }
+
+    //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
+    //PARAMETROS//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
+    //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
+    //STATUS
     [SerializeField]
     private GameState _gameState;
     public GameState gameState { get => _gameState; }
+    private GameMode _difficulty;
+    public GameMode difficulty { get => _difficulty; }
+
+    //UI
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public Button resetButton;
+    public GameObject titleScreen;
+    //UI - SCORE
+    public TextMeshProUGUI eMaxScoreText;
+    public TextMeshProUGUI eMaxScoreNum;
+    public TextMeshProUGUI nMaxScoreText;
+    public TextMeshProUGUI nMaxScoreNum;
+    public TextMeshProUGUI hMaxScoreText;
+    public TextMeshProUGUI hMaxScoreNum;
+    //---//
+
+
+    //SCORE
+    const string eMaxScore = "EASY_MAX_SCORE";
+    const string nMaxScore = "NORMAL_MAX_SCORE";
+    const string hMaxScore = "HARD_MAX_SCORE";
+    private int score;
+
+    //LIFE
+    public List<GameObject> lives;
+    public GameObject lifePanel;
+    private int livesCount;
+
+    //FOLLOW MOUSE
     private GameObject followMouseObject;
+
+    //SPAWN
+    public GameObject bomb;
+    [SerializeField, Range(1, 20)]
+    private int cantMoreBombs = 5;
+    private float xPosition = 4f;
     [SerializeField]
     private List<GameObject> objects;
     [SerializeField, Range(0.1f, 10f)]
     private float spawnSeconds = 1f;
-    private float xPosition = 4f;
-    private int score;
+
+    //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
+    //PARAMETROS//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
+    //-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//
 
     // Start is called before the first frame update
     void Start()
     {
-        _gameState = GameState.inGame;
+        lifePanel.gameObject.SetActive(false);
+        _difficulty = GameMode.easy;
+        ShowMaxScore();
         resetButton.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(false);
-        UpdateScore(0);
-        StartCoroutine(spawnObjects());
-        followMouseObject = GameObject.Find("FollowMouse");
+        scoreText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        followMouseObject.transform.position = MousePosition();
+        if (_gameState.Equals(GameState.inGame))
+        {
+            followMouseObject.transform.position = MousePosition();
+        }
+    }
+
+    /// <summary>
+    /// Método que inicia la partida y modifica el estado del juego
+    /// </summary>
+    public void StartGame(GameMode difficulty = GameMode.easy) 
+    {
+        _difficulty = difficulty;
+        SetDifficulty(difficulty);
+        livesCount = lives.Count;
+        titleScreen.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(true);
+        _gameState = GameState.inGame;
+        UpdateScore(0);
+        StartCoroutine(spawnObjects());
+        followMouseObject = GameObject.Find("FollowMouse");
+    }
+
+    /// <summary>
+    /// Settea la dificultad
+    /// </summary>
+    void SetDifficulty(GameMode difficulty) 
+    {
+        switch (difficulty) 
+        {
+            case GameMode.easy:
+                lifePanel.gameObject.SetActive(true);
+                break;
+            case GameMode.normal:
+                spawnSeconds /= 2f;
+                lifePanel.gameObject.SetActive(true);
+                break;
+            case GameMode.hard:
+                lives.Clear();
+                spawnSeconds /= 2f;
+                for (int i = 0; i < cantMoreBombs; i++)
+                {
+                    objects.Add(bomb);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Quita una vida al jugador a menos que no queden mas. En ese caso envia GAME OVER
+    /// </summary>
+    public void LoseLife() 
+    {
+        if (livesCount != 0)
+        {
+            livesCount--;
+            Image heartImage = lives[livesCount].GetComponent<Image>();
+            Color heartColor = heartImage.color;
+            heartColor.a = 0.3f;
+            heartImage.color = heartColor;
+        }
+        else 
+        {
+            ChangeGameOver();
+        }
     }
 
     /// <summary>
@@ -94,6 +206,18 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Escribe el texto de la mayor puntuacion
+    /// </summary>
+    public void ShowMaxScore() 
+    {
+        int eIntMaxScore = PlayerPrefs.GetInt(eMaxScore);
+        eMaxScoreNum.text = eIntMaxScore.ToString();
+        int nIntMaxScore = PlayerPrefs.GetInt(nMaxScore);
+        nMaxScoreNum.text = nIntMaxScore.ToString();
+        int hIntMaxScore = PlayerPrefs.GetInt(hMaxScore);
+        hMaxScoreNum.text = hIntMaxScore.ToString();
+    }
+    /// <summary>
     /// Finalizacion del juego
     /// </summary>
     public void ChangeGameOver( ParticleSystem lastExplode = null, Vector3 lastPosition = new Vector3()) 
@@ -103,6 +227,7 @@ public class GameManager : MonoBehaviour
             Instantiate(lastExplode, lastPosition, lastExplode.transform.rotation);
             StartCoroutine(LastSeconds(lastExplode.main.duration));
         }
+        SetMaxScore();
         _gameState = GameState.gameOver;
         scoreText.gameObject.SetActive(false);
         gameOverText.gameObject.SetActive(true);
@@ -110,6 +235,34 @@ public class GameManager : MonoBehaviour
         if (lastExplode == null)
         {
             StartCoroutine(LastSeconds(0));
+        }
+    }
+
+    /// <summary>
+    /// Settea el score maximo
+    /// </summary>
+    void SetMaxScore() 
+    {
+        switch (difficulty)
+        {
+            case GameMode.easy:
+                if (score > PlayerPrefs.GetInt(eMaxScore))
+                {
+                    PlayerPrefs.SetInt(eMaxScore, score);
+                }
+                break;
+            case GameMode.normal:
+                if (score > PlayerPrefs.GetInt(nMaxScore))
+                {
+                    PlayerPrefs.SetInt(nMaxScore, score);
+                }
+                break;
+            case GameMode.hard:
+                if (score > PlayerPrefs.GetInt(hMaxScore))
+                {
+                    PlayerPrefs.SetInt(hMaxScore, score);
+                }
+                break;
         }
     }
 
